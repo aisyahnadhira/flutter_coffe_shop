@@ -1,3 +1,4 @@
+import 'package:coffe_shop/pages/main_screen.dart';
 import 'package:flutter/material.dart';
 
 class StartScreen extends StatelessWidget {
@@ -70,7 +71,8 @@ class StartScreen extends StatelessWidget {
               ),
               child: TextButton(
                 onPressed: () {
-                  Navigator.pushNamed(context, '/login');
+                  Navigator.push(context, MaterialPageRoute(builder: (context) => MainScreen()),
+                  );
                 },
                 child: Text(
                   'Get Started',
