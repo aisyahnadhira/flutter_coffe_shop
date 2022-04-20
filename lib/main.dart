@@ -12,6 +12,7 @@ class CoffeApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      title: "Coffe Shop",
       debugShowCheckedModeBanner: false,
       home: MainScreen()
     );
