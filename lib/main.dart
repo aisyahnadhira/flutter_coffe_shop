@@ -1,4 +1,3 @@
-import 'package:coffe_shop/pages/main_screen.dart';
 import 'package:coffe_shop/pages/start.dart';
 import 'package:flutter/material.dart';
 
@@ -14,7 +13,7 @@ class CoffeApp extends StatelessWidget {
     return MaterialApp(
       title: "Coffe Shop",
       debugShowCheckedModeBanner: false,
-      home: MainScreen()
+      home: StartScreen()
     );
   }
 }

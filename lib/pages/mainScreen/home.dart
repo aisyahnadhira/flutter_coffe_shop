@@ -1,6 +1,3 @@
-import 'package:coffe_shop/models/data.dart';
-import 'package:coffe_shop/pages/mainScreen/cart.dart';
-import 'package:coffe_shop/pages/mainScreen/coffe_card.dart';
 import 'package:flutter/material.dart';
 
 class HomeScreen extends StatefulWidget {
@@ -12,19 +9,19 @@ class HomeScreen extends StatefulWidget {
 
 class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
   List<String> imageCoffee = [
-    'assets/images/ha.png',
-    'assets/images/ia.png',
-    'assets/images/hc.png',
-    'assets/images/ic.png',
+    'assets/images/coffee1.png',
+    'assets/images/coffee2.png',
+    'assets/images/coffee3.png',
+    'assets/images/coffee4.png',
   ];
 
   List<String> coffeeName = [
-    'Americano',
-    'Latte',
+    'Double Espresso',
+    'Espresso Macchiato',
     'Cappuccino',
-    'Espresso',
+    'Latte',
   ];
-  List<double> price = [4.29, 3.21, 6.46, 2.90];
+  List<double> price = [5.25, 4.55, 6.46, 2.90];
 
   @override
   Widget build(BuildContext context) {
@@ -34,28 +31,16 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
       backgroundColor: Colors.black,
       body: SingleChildScrollView(
         child: Padding(
-          padding: const EdgeInsets.all(32.0),
+          padding: const EdgeInsets.only(top: 48.0, left: 24.0, right: 24.0, bottom: 20.0),
           child: Column(
             children: [
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  Container(
-                    decoration: BoxDecoration(
-                      color: Colors.white38,
-                      borderRadius: BorderRadius.circular(10.0),
-                    ),
-                    child: InkWell(
-                      splashColor: Colors.white, // Splash color
-                      onTap: () {},
-                      child: SizedBox(
-                          height: 40,
-                          width: 40,
-                          child: Icon(
-                            Icons.menu,
-                            size: 30,
-                          )),
-                    ),
+                  CircleAvatar(
+                    radius: 22,
+                    backgroundImage: AssetImage('assets/images/sehun.png'),
+                    backgroundColor: Colors.transparent,
                   ),
                   Row(
                     children: [
@@ -64,14 +49,25 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
                           style: TextStyle(
                               fontSize: 17,
                               fontFamily: 'Montserrat',
-                              fontWeight: FontWeight.w300,
+                              fontWeight: FontWeight.w600,
                               color: Colors.white)),
                     ],
                   ),
-                  CircleAvatar(
-                    radius: 22,
-                    backgroundImage: AssetImage('assets/images/sehun.png'),
-                    backgroundColor: Colors.transparent,
+                  ClipOval(
+                    child: Material(
+                      color: Color.fromARGB(224, 230, 228, 228), // Button color
+                      child: InkWell(
+                        splashColor: Colors.white, // Splash color
+                        onTap: () {},
+                        child: SizedBox(
+                            width: 40,
+                            height: 40,
+                            child: Icon(
+                              Icons.notifications_none,
+                              size: 24,
+                            )),
+                      ),
+                    ),
                   ),
                 ],
               ),
@@ -81,7 +77,7 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
                   Text("Good Morning Sehun",
                       style: TextStyle(
                         fontSize: 20,
-                        fontWeight: FontWeight.w400,
+                        fontWeight: FontWeight.w600,
                         color: Colors.white,
                       )),
                 ],
@@ -116,7 +112,7 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
                       style: TextStyle(
                         fontSize: 20,
                         fontFamily: 'Montserrat',
-                        fontWeight: FontWeight.w400,
+                        fontWeight: FontWeight.w600,
                         color: Colors.white,
                       )),
                 ],
@@ -133,7 +129,7 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
                     color: Color.fromARGB(224, 230, 228, 228),
                   ),
                   tabs: [
-                    TabDetail("Americano"),
+                    TabDetail("Expresso"),
                     TabDetail("Cappuccino"),
                     TabDetail("Frappuccino"),
                     TabDetail("Latte"),
@@ -142,11 +138,35 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
                     TabDetail("Others"),
                   ]),
               SizedBox(height: 20),
-
-              Card(context, 1),
-              Card(context, 2),
-              Card(context, 3)
-              // CoffeeCard()
+              Row(
+                children: [
+                  CoffeCard(context, 0),
+                  SizedBox(width: 25),
+                  CoffeCard(context, 1),
+                  
+                ],
+              ),
+              SizedBox(height: 20),
+              Row(
+                children: [
+                  Text("Suggestions",
+                      style: TextStyle(
+                        fontSize: 20,
+                        fontFamily: 'Montserrat',
+                        fontWeight: FontWeight.w600,
+                        color: Colors.white,
+                      )),
+                ],
+              ),
+              SizedBox(height: 20),
+              Row(
+                children: [
+                  CoffeCard(context, 2),
+                  SizedBox(width: 25),
+                  CoffeCard(context, 3),
+                  
+                ],
+              ),
             ],
           ),
         ),
@@ -154,78 +174,75 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
     );
   }
 
-  Row Card(BuildContext context, int index) {
-    return Row(children: [
-              Container(
-                decoration: BoxDecoration(
-                  color: Color(0xff242931),
-                  borderRadius: BorderRadius.circular(12),
-                ),
-                child: Column(children: [
+  Column CoffeCard(BuildContext context, int index) {
+    return Column(children: [
                   Container(
-                    height: MediaQuery.of(context).size.height * 0.3,
-                    width: MediaQuery.of(context).size.width * 0.5,
                     decoration: BoxDecoration(
-                        image: DecorationImage(
-                            image: AssetImage(imageCoffee[index]),
-                            fit: BoxFit.cover)),
-                  ),
-                  Padding(
-                    padding: EdgeInsets.all(15),
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Text(
-                          coffeeName[index],
-                          style: TextStyle(
-                              color: Color(0xff919293),
-                              fontSize: 20,
-                              fontWeight: FontWeight.w200),
-                        ),
-                        SizedBox(
-                          height: 5,
-                        ),
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            Row(children: [
-                              Text(
-                                r'$ ',
-                                style: TextStyle(
-                                    color: Color(0xffd17842),
-                                    fontWeight: FontWeight.bold,
-                                    fontSize: 20),
-                              ),
-
-                              Text(
-                                price[index].toString(),
-                                style: TextStyle(
-                                    color: Colors.white,
-                                    fontSize: 20,
-                                    fontWeight: FontWeight.bold),
-                              ),                      
-                              SizedBox(width: 15),
-                              Container(
-                                  height: 30,
-                                  width: 30,
-                                  decoration: BoxDecoration(
-                                      color: Color(0xffd17842),
-                                      borderRadius:
-                                          BorderRadius.circular(10)),
-                                  child: Icon(
-                                    Icons.add,
-                                    color: Colors.white,
-                                    size: 20,
-                                  ))
-                            ])
-                          ],
-                        )
-                      ],
+                      color: Color.fromARGB(136, 48, 47, 47),
+                      borderRadius: BorderRadius.circular(12),
                     ),
-                  )
-                ]),
-              )
-            ]);
+                    child: Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: Column(
+                        children: [
+                          Container(
+                            height: MediaQuery.of(context).size.height * 0.15,
+                            width: MediaQuery.of(context).size.width * 0.35,
+                            decoration: BoxDecoration(
+                              image: DecorationImage(
+                                image: AssetImage(imageCoffee[index]),
+                                
+                              ),
+                            ),
+                          ),
+                          Text(
+                            coffeeName[index],
+                            style: TextStyle(
+                                fontSize: 14,
+                                fontFamily: 'Montserrat',
+                                fontWeight: FontWeight.w400,
+                                color: Colors.white),
+                          ),
+                          SizedBox(height: 10),
+                          Row(
+                            children: [
+                              Row(
+                                children: [
+                                Text(
+                                  "\$ " + price[index].toString(),
+                                  style: TextStyle(
+                                    fontSize: 14,
+                                    fontFamily: 'Montserrat',
+                                    fontWeight: FontWeight.w400,
+                                    color: Colors.white,
+                                  ),
+                                ),
+                                SizedBox(width: 52),
+                                ClipOval(
+                                  child: Material(
+                                    color: Colors.grey[800], // Button color
+                                    child: InkWell(
+                                      splashColor: Colors.grey, // Splash color
+                                      onTap: () {},
+                                      child: SizedBox(
+                                          width: 30,
+                                          height: 30,
+                                          child: Icon(
+                                            Icons.add,
+                                            color: Colors.white,
+                                            size: 20,
+                                          )),
+                                    ),
+                                  ),
+                                ),
+                              ])
+                            ],
+                          ),
+                        ],
+                      ),
+                    ),
+                  ),
+                ]);
   }
 
   Container TabDetail(String kategori) {
